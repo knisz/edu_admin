@@ -67,18 +67,20 @@
 
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/edu/teacher/edit/' + scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit"
-              >修改</el-button
-            >
+          <!-- 通过路由跳转 -->
+          <router-link :to="'/teacher/edit/' + scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">
+              修改
+            </el-button>
           </router-link>
           <el-button
             type="danger"
             size="mini"
             icon="el-icon-delete"
             @click="removeDataById(scope.row.id)"
-            >删除</el-button
           >
+            删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -130,9 +132,10 @@ export default {
         .getTeacherListPage(this.page, this.limit, this.teacherQuery)
         .then((response) => {
           //document.write(response);
-          console.log(response.data.items.records);
+          //console.log(response.data.items.records);
           //this.list = response.data.rows;
           this.list = response.data.items.records;
+          console.log(response.data);
           this.total = response.data.total;
           this.listLoading = false;
         })
@@ -140,26 +143,60 @@ export default {
           document.write(error);
         });
     },
+    resetData() {
+      this.teacherQuery = {};
+      this.getList();
+    },
+    removeDataById(id) {
+      // debugger
+      // console.log(memberId)
+      this.$confirm("此操作将永久删除该记录, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          return teacher.deleteTeacherId(id);
+        })
+        .then(() => {
+          this.getList(this.page);
+          this.$message({
+            type: "success",
+            message: "删除成功!",
+          });
+        })
+        .catch((response) => {
+          console.log(response);
+          // 失败
+          if (response === "cancel") {
+            this.$message({
+              type: "info",
+              message: "已取消删除",
+            });
+          } else {
+            this.$message({
+              type: "error",
+              message: "删除失败",
+            });
+          }
+        });
+    },
+    //   methods: {
+    //     getList() { // 调用api层获取数据库中的数据
+    //       console.log('加载列表')
+    //       this.page = page
+    //       this.listLoading = true
+    //       teacher.getTeacherListPage(this.page, this.limit, this.teacherQuery).then(response => {
+    //         // debugger 设置断点调试
+    //         if (response.success === true) {
+    //           console.log(response)
+    //           this.list = response.data.rows
+    //           this.total = response.data.total
+    //         }
+    //         this.listLoading = false
+    //       })
+    //     }
+    //   }
   },
-  resetData() {
-    this.teacherQuery = {};
-    this.fetchData();
-  },
-  //   methods: {
-  //     getList() { // 调用api层获取数据库中的数据
-  //       console.log('加载列表')
-  //       this.page = page
-  //       this.listLoading = true
-  //       teacher.getTeacherListPage(this.page, this.limit, this.teacherQuery).then(response => {
-  //         // debugger 设置断点调试
-  //         if (response.success === true) {
-  //           console.log(response)
-  //           this.list = response.data.rows
-  //           this.total = response.data.total
-  //         }
-  //         this.listLoading = false
-  //       })
-  //     }
-  //   }
 };
 </script>

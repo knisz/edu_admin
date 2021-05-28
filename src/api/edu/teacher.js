@@ -10,6 +10,32 @@ export default {
             //后端使用teacherQuery条件对象，前端要用data将对象转化为json传送
             data: teacherQuery
         })
+    },
+    deleteTeacherId(id) {
+        return request({
+            url: `/eduservice/teacher/${id}`,
+            method: 'delete'
+        })
+    },
+    addTeacher(teacher) {
+        return request({
+            url: `/eduservice/teacher/addTeacher`,
+            method: 'post',
+            data: teacher   //将讲师的信息已json的形式保存
+        })
+    },
+    getTeacherInfo(id){
+        return request({
+            url: `/eduservice/teacher/getTeacher/${id}`,
+            method: 'get',
+        })
+    },
+    updateTeacherInfo(id,teacher){
+        return request({
+            url: `/eduservice/teacher/updateTeacher/${id}`, 
+            method: 'put',
+            data: teacher   //将讲师的信息已json的形式保存
+        })
     }
 }
 
