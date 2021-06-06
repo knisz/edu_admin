@@ -96,7 +96,7 @@ export default {
         level: 1,
         career: "",
         intro: "",
-        avatar: "",
+        avatar: "https://online-teach-file.oss-cn-beijing.aliyuncs.com/teacher/2019/11/08/e44a2e92-2421-4ea3-bb49-46f2ec96ef88.png",
       },
       imagecropperKey: 0, //上传组件key值
       BASE_API: process.env.BASE_API, //获取dev.env.js里面地址

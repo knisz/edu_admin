@@ -111,7 +111,7 @@ export default {
                 teacherId: '',
                 lessonNum: 0,
                 description: '',
-                cover: '/static/01.jpg',
+                cover: '/static/cover.jfif',
                 price: 0
             },
             courseId:'',

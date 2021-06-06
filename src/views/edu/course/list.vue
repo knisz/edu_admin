@@ -35,7 +35,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="title" label="课程名称" width="80" />
+      <el-table-column prop="title" label="课程名称" width="120" />
 
       <el-table-column label="课程状态" width="80">
         <template slot-scope="scope">
@@ -49,15 +49,15 @@
 
       <el-table-column prop="viewCount" label="浏览数量" width="60" />
 
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="操作" width="280" align="center">
         <template slot-scope="scope">
-          <router-link :to="'/teacher/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程基本信息</el-button>
+          <router-link :to="'/course/info/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">信息</el-button>
           </router-link>
-          <router-link :to="'/teacher/edit/'+scope.row.id">
-            <el-button type="primary" size="mini" icon="el-icon-edit">编辑课程大纲息</el-button>
+          <router-link :to="'/course/chapter/'+scope.row.id">
+            <el-button type="primary" size="mini" icon="el-icon-edit">大纲</el-button>
           </router-link>
-          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除课程信息</el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click="removeDataById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
